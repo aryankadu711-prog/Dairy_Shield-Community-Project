@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+
+@theme {
+  /* Fonts */
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+
+  /* Theme Palette */
+  --color-dairy-dark: #0b1e14;
+  --color-dairy-green-900: #143626;
+  --color-dairy-green-800: #1b4332;
+  --color-dairy-green-700: #2d6a4f;
+  --color-dairy-green-600: #40916c;
+  --color-dairy-green-500: #52b788;
+  --color-dairy-green-400: #74c69d;
+  --color-dairy-green-300: #95d5b2;
+  --color-dairy-green-200: #b7e4c7;
+  --color-dairy-green-100: #d8f3dc;
+
+  --color-dairy-blue-900: #0a192f;
+  --color-dairy-blue-800: #0f2c59;
+  --color-dairy-blue-700: #1d3557;
+  --color-dairy-blue-600: #457b9d;
+  --color-dairy-blue-500: #3a86c8;
+  --color-dairy-blue-400: #6ca0dc;
+  --color-dairy-sky: #e0f2fe;
+
+  --color-dairy-cream: #f9fbf7;
+  --color-dairy-cream-dark: #f0f4ec;
+  --color-dairy-orange: #f77f00;
+
+  /* Shadows */
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
+  --shadow-glass-dark: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Custom Base Styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    @apply bg-dairy-cream text-slate-800 antialiased overflow-x-hidden;
+  }
+
+  body.dark {
+    @apply bg-dairy-dark text-slate-100;
+  }
+
+  /* Custom Selection */
+  ::selection {
+    @apply bg-dairy-green-300 text-dairy-green-900;
+  }
+}
+
+/* Custom Utilities */
+@utility glass-card {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: var(--shadow-glass);
+}
+
+@utility dark-glass-card {
+  background: rgba(11, 30, 20, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-glass-dark);
+}
+
+@utility glass-navbar {
+  background: rgba(249, 251, 247, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@utility dark-glass-navbar {
+  background: rgba(11, 30, 20, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@utility glass-input {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  @apply focus:outline-none focus:ring-2 focus:ring-dairy-green-600 focus:border-transparent transition-all duration-200;
+}
+
+@utility dark-glass-input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  @apply focus:outline-none focus:ring-2 focus:ring-dairy-green-400 focus:border-transparent transition-all duration-200;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-dairy-cream;
+}
+
+body.dark ::-webkit-scrollbar-track {
+  @apply bg-dairy-dark;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-dairy-green-200 rounded-full border-2 border-dairy-cream;
+}
+
+body.dark ::-webkit-scrollbar-thumb {
+  @apply bg-dairy-green-800 rounded-full border-2 border-dairy-dark;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-dairy-green-400;
+}
+
+body.dark ::-webkit-scrollbar-thumb:hover {
+  @apply bg-dairy-green-600;
+}
+
+/* Cards & Layout Tweaks */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+/* Floating Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
+@keyframes spin-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* Masonry Fallback */
+.gallery-masonry {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-gap: 20px;
+  grid-auto-flow: dense;
+}
+
+@media (min-width: 768px) {
+  .gallery-masonry-item:nth-child(3n) {
+    grid-row: span 2;
+  }
+  .gallery-masonry-item:nth-child(4n+1) {
+    grid-row: span 1.5;
+  }
+}
