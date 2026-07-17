@@ -22,11 +22,20 @@ export const AppProvider = ({ children }) => {
   // Survey Config State
   const [surveyConfig, setSurveyConfig] = useState(() => {
     const saved = localStorage.getItem('dairyshield_survey_config');
-    return saved ? JSON.parse(saved) : {
-      formLink: 'https://docs.google.com/forms/d/1rxxOih8msF2kNOKTQvzhJIK99QUGFU_U-iGWBmTzNeQ/viewform',
-      embedLink: 'https://docs.google.com/forms/d/1rxxOih8msF2kNOKTQvzhJIK99QUGFU_U-iGWBmTzNeQ/viewform?embedded=true',
+    const defaultConfig = {
+      formLink: 'https://docs.google.com/forms/d/e/1FAIpQLSft6jIS1VqUrS17IDjG9zuw2ZlYQm8DAlc9pzOJ0Lufbbuymg/viewform?usp=sf_link',
+      embedLink: 'https://docs.google.com/forms/d/e/1FAIpQLSft6jIS1VqUrS17IDjG9zuw2ZlYQm8DAlc9pzOJ0Lufbbuymg/viewform?embedded=true',
       spreadsheetId: ''
     };
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      // Migrate if it has the old form link
+      if (parsed.formLink && (parsed.formLink.includes('1rxxOih8msF2kNOKTQvzhJIK99QUGFU_U-iGWBmTzNeQ') || parsed.formLink.includes('viewform?usp=sf_link'))) {
+        return defaultConfig;
+      }
+      return parsed;
+    }
+    return defaultConfig;
   });
 
   // Default fallback static array of images
