@@ -10,10 +10,10 @@ export const AppProvider = ({ children }) => {
 
   // Statistics State
   const [stats, setStats] = useState(() => {
-    const saved = localStorage.getItem('dairyshield_stats');
+    const saved = localStorage.getItem('dairyshield_stats_v3');
     return saved ? JSON.parse(saved) : {
-      reached: 542,
-      surveyResponses: 124,
+      reached: 60,
+      surveyResponses: 54,
       awarenessDrives: 18,
       localCommunities: 6
     };
@@ -205,7 +205,7 @@ Under Section 59 of the Food Safety and Standards Act, selling adulterated food 
     const seasonalTaste = ["Yes, milk tastes different/thinner in summers", "Yes, milk is creamier in winters", "No, it tastes exactly the same year-round"];
     const preferenceReason = ["Packaged milk feels safer, hygienic, and standardized", "Local farm milk feels fresher, creamy, and natural", "Convenience of delivery/purchase is my main factor"];
 
-    for (let i = 0; i < 124; i++) {
+    for (let i = 0; i < 54; i++) {
       let product = products[1];
       if (i % 5 === 0) product = products[0];
       else if (i % 8 === 0) product = products[2];
@@ -268,7 +268,7 @@ Under Section 59 of the Food Safety and Standards Act, selling adulterated food 
 
   // Survey Responses State
   const [surveyResponses, setSurveyResponses] = useState(() => {
-    const saved = localStorage.getItem('dairyshield_survey_responses');
+    const saved = localStorage.getItem('dairyshield_survey_responses_v3');
     return saved ? JSON.parse(saved) : getSeededSurveyResponses();
   });
 
@@ -451,7 +451,7 @@ Under Section 59 of the Food Safety and Standards Act, selling adulterated food 
 
   // Sync to local storage as secondary backup
   useEffect(() => {
-    localStorage.setItem('dairyshield_stats', JSON.stringify(stats));
+    localStorage.setItem('dairyshield_stats_v3', JSON.stringify(stats));
   }, [stats]);
 
   useEffect(() => {
@@ -467,7 +467,7 @@ Under Section 59 of the Food Safety and Standards Act, selling adulterated food 
   }, [articles]);
 
   useEffect(() => {
-    localStorage.setItem('dairyshield_survey_responses', JSON.stringify(surveyResponses));
+    localStorage.setItem('dairyshield_survey_responses_v3', JSON.stringify(surveyResponses));
   }, [surveyResponses]);
 
   // MUTATIONS (Sync local states + remote tables)
