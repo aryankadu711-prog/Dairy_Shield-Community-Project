@@ -10,9 +10,9 @@ export const AppProvider = ({ children }) => {
 
   // Statistics State
   const [stats, setStats] = useState(() => {
-    const saved = localStorage.getItem('dairyshield_stats_v3');
+    const saved = localStorage.getItem('dairyshield_stats_v4');
     return saved ? JSON.parse(saved) : {
-      reached: 60,
+      reached: 70,
       surveyResponses: 54,
       awarenessDrives: 18,
       localCommunities: 6
@@ -451,7 +451,7 @@ Under Section 59 of the Food Safety and Standards Act, selling adulterated food 
 
   // Sync to local storage as secondary backup
   useEffect(() => {
-    localStorage.setItem('dairyshield_stats_v3', JSON.stringify(stats));
+    localStorage.setItem('dairyshield_stats_v4', JSON.stringify(stats));
   }, [stats]);
 
   useEffect(() => {
